@@ -23,10 +23,39 @@ public class CustomerController {
         return customers;
     }
 
-    @GetMapping("/clientes/{username}")
+    @GetMapping("/clientes/username/{username}")
     public Customer getcliente(@PathVariable String username){
         for (Customer c : customers) {
             if(c.getUsername().equalsIgnoreCase(username)){
+                return c;
+            }
+        }
+        return null;
+    }
+
+    @GetMapping("/clientes/id/{ID}")
+    public Customer getID(@PathVariable int ID){
+        for (Customer c : customers) {
+            if (c.getID() == ID){
+                return c;
+            }
+        }
+        return null;
+    }
+
+    @GetMapping("/clientes/nombre/{nombre}")
+    public Customer getNombre(@PathVariable String nombre){
+        for (Customer c : customers){
+            if (c.getNombre().equalsIgnoreCase(nombre)){
+                return c;
+            }
+        }
+        return null;
+    }
+    @GetMapping("/clientes/password/{password}")
+    public Customer getPassword(@PathVariable String password){
+        for (Customer c : customers) {
+            if (c.getPassword().equalsIgnoreCase(password)){
                 return c;
             }
         }
