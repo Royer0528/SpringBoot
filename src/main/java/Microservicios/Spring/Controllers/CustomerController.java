@@ -16,11 +16,21 @@ public class CustomerController {
             new Customer(567,"Carl Johnson","CJ","Smoke")
     ));
 
+    /**
+     *
+     * Controlador del tipo GET para obtner una lista de clientes
+     * @return: Retorna lista de clientes
+     */
     @GetMapping("clientes")
     public List<Customer> getCustomers(){
         return customers;
     }
 
+    /**
+     *Cotrolador rest del tipo GET para obtener un unico regitro
+     * @param username Se utiliza el parametro username para obtner un registro en especifico
+     * @return retorna un customerId
+     */
     @GetMapping("/clientes/{username}")
     public Customer getcliente(@PathVariable String username){
         for (Customer c : customers) {
@@ -31,12 +41,50 @@ public class CustomerController {
         return null;
     }
 
+    /**
+     * Controlador rest del tipo POST para crear un nuevo registro en la lista de clientes
+     * @param customer parametro utilizado para crear el nuevo registro
+     * @return debe retornar un 200 created
+     */
+
     @PostMapping("/clientes")
     public Customer postCliente(@RequestBody Customer customer){
         customers.add(customer);
         return customer;
     }
 
+    @PutMapping("/clientes")
+    public Customer putCliente(@RequestBody Customer customer){
+        for(Customer c : customers){
+            if(c.getID() == customer.getID()){
+                c.setNombre(customer.getNombre());
+                c.setUsername(customer.getUsername());
+                c.setPassword(customer.getPassword());
+
+
+                return c;
+            }
+        }
+        return null;
+    }
+
+    /**
+     *
+     * Controlador rest para el tipo de peticiones http delete
+     * @param id se utilizar le parametro id para indicar un id especifico de un cliente para eliminarlo
+     * @return retorna un tipo de respuesta 200 despues de eliminar el cliente con el id especificado
+     */
+    @DeleteMapping("/clientes/{id}")
+    public Customer deleteClientente(@PathVariable int id){
+        for(Customer c : customers){
+            if(c.getID() == id){
+                customers.remove(c);
+
+                return c;
+            }
+        }
+        return null;
+    }
 }
 
 
