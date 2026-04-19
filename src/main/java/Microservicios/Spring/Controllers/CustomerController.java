@@ -1,11 +1,17 @@
 package Microservicios.Spring.Controllers;
 
 import Microservicios.Spring.Domain.Customer;
+import org.apache.coyote.Request;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+/**
+ *
+ * Aqui se utiliza el metodo RequestMapping a nivel de clase
+ */
 @RestController
 @RequestMapping("/clientes")
 public class CustomerController {
@@ -22,7 +28,11 @@ public class CustomerController {
      * Controlador del tipo GET para obtner una lista de clientes
      * @return: Retorna lista de clientes
      */
-    @GetMapping
+    /**
+     * Aqui se utiliza el metodo RequestMapping a nivel de metodo(Ambas sintaxys son iguales)
+     */
+    @RequestMapping(method = RequestMethod.GET)
+    // @GetMapping
     public List<Customer> getCustomers(){
         return customers;
     }
@@ -32,7 +42,8 @@ public class CustomerController {
      * @param username Se utiliza el parametro username para obtner un registro en especifico
      * @return retorna un customerId
      */
-    @GetMapping("/{username}")
+    @RequestMapping(value = "/{username}" , method = RequestMethod.GET)
+    // @GetMapping("/{username}")
     public Customer getcliente(@PathVariable String username){
         for (Customer c : customers) {
             if(c.getUsername().equalsIgnoreCase(username)){
@@ -47,14 +58,14 @@ public class CustomerController {
      * @param customer parametro utilizado para crear el nuevo registro
      * @return debe retornar un 200 created
      */
-
-    @PostMapping
+    @RequestMapping(method = RequestMethod.POST)
+    // @PostMapping
     public Customer postCliente(@RequestBody Customer customer){
         customers.add(customer);
         return customer;
     }
-
-    @PutMapping
+    @RequestMapping(method = RequestMethod.PUT)
+    // @PutMapping
     public Customer putCliente(@RequestBody Customer customer){
         for(Customer c : customers){
             if(c.getID() == customer.getID()){
@@ -75,7 +86,8 @@ public class CustomerController {
      * @param id se utilizar le parametro id para indicar un id especifico de un cliente para eliminarlo
      * @return retorna un tipo de respuesta 200 despues de eliminar el cliente con el id especificado
      */
-    @DeleteMapping("/{id}")
+    @RequestMapping(value = ("/{id}"), method = RequestMethod.DELETE)
+    // @DeleteMapping("/{id}")
     public Customer deleteClientente(@PathVariable int id){
         for(Customer c : customers){
             if(c.getID() == id){
@@ -88,12 +100,13 @@ public class CustomerController {
     }
 
     /**
-     * Metodo htpp del tipo patch
+     * Metodo http del tipo patch
      * @param customer se utiliza el parametro customer del tipo Customer para hacer la modificacion parcial de los
      *                 elementos del objeto
      * @return Retorna un json con el campo modificado
      */
-    @PatchMapping
+    @RequestMapping(method = RequestMethod.PATCH)
+    // @PatchMapping
     public Customer patchClientes(@RequestBody Customer customer){
         for(Customer c : customers){
             if(c.getID() == customer.getID()){
