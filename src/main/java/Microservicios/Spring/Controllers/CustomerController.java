@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 @RestController
+@RequestMapping("/clientes")
 public class CustomerController {
 
     private List<Customer> customers = new ArrayList<>(Arrays.asList(
@@ -21,7 +22,7 @@ public class CustomerController {
      * Controlador del tipo GET para obtner una lista de clientes
      * @return: Retorna lista de clientes
      */
-    @GetMapping("clientes")
+    @GetMapping
     public List<Customer> getCustomers(){
         return customers;
     }
@@ -31,7 +32,7 @@ public class CustomerController {
      * @param username Se utiliza el parametro username para obtner un registro en especifico
      * @return retorna un customerId
      */
-    @GetMapping("/clientes/{username}")
+    @GetMapping("/{username}")
     public Customer getcliente(@PathVariable String username){
         for (Customer c : customers) {
             if(c.getUsername().equalsIgnoreCase(username)){
@@ -47,13 +48,13 @@ public class CustomerController {
      * @return debe retornar un 200 created
      */
 
-    @PostMapping("/clientes")
+    @PostMapping
     public Customer postCliente(@RequestBody Customer customer){
         customers.add(customer);
         return customer;
     }
 
-    @PutMapping("/clientes")
+    @PutMapping
     public Customer putCliente(@RequestBody Customer customer){
         for(Customer c : customers){
             if(c.getID() == customer.getID()){
@@ -74,7 +75,7 @@ public class CustomerController {
      * @param id se utilizar le parametro id para indicar un id especifico de un cliente para eliminarlo
      * @return retorna un tipo de respuesta 200 despues de eliminar el cliente con el id especificado
      */
-    @DeleteMapping("/clientes/{id}")
+    @DeleteMapping("/{id}")
     public Customer deleteClientente(@PathVariable int id){
         for(Customer c : customers){
             if(c.getID() == id){
@@ -85,7 +86,34 @@ public class CustomerController {
         }
         return null;
     }
+
+    /**
+     * Metodo htpp del tipo patch
+     * @param customer se utiliza el parametro customer del tipo Customer para hacer la modificacion parcial de los
+     *                 elementos del objeto
+     * @return Retorna un json con el campo modificado
+     */
+    @PatchMapping
+    public Customer patchClientes(@RequestBody Customer customer){
+        for(Customer c : customers){
+            if(c.getID() == customer.getID()){
+                if(customer.getNombre() != null){
+                    c.setNombre(customer.getNombre());
+                }
+                if(customer.getUsername() != null){
+                    c.setUsername(customer.getUsername());
+                }
+                if(customer.getPassword() != null){
+                    c.setPassword(customer.getPassword());
+                }
+
+                return c;
+            }
+        }
+        return null;
+    }
 }
+
 
 
 
