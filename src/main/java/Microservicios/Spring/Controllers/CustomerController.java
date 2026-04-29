@@ -2,11 +2,15 @@ package Microservicios.Spring.Controllers;
 
 import Microservicios.Spring.Domain.Customer;
 import org.apache.coyote.Request;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -31,26 +35,27 @@ public class CustomerController {
     /**
      * Aqui se utiliza el metodo RequestMapping a nivel de metodo(Ambas sintaxys son iguales)
      */
-    @RequestMapping(method = RequestMethod.GET)
-    // @GetMapping
-    public List<Customer> getCustomers(){
-        return customers;
-    }
+    //@RequestMapping(method = RequestMethod.GET)
+    @GetMapping
+            public ResponseEntity<List<Customer>> getCustomers(){
+                return ResponseEntity.ok(customers);
+            }
 
     /**
      *Cotrolador rest del tipo GET para obtener un unico regitro
      * @param username Se utiliza el parametro username para obtner un registro en especifico
      * @return retorna un customerId
      */
-    @RequestMapping(value = "/{username}" , method = RequestMethod.GET)
-    // @GetMapping("/{username}")
-    public Customer getcliente(@PathVariable String username){
+    //@RequestMapping(value = "/{username}" , method = RequestMethod.GET)
+    @GetMapping("/{username}")
+    public ResponseEntity<?> getcliente(@PathVariable String username){
         for (Customer c : customers) {
             if(c.getUsername().equalsIgnoreCase(username)){
-                return c;
+                return ResponseEntity.ok(c);
+                // return c;
             }
         }
-        return null;
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Cliente no encontrado con username: " + username);
     }
 
     /**
@@ -58,14 +63,17 @@ public class CustomerController {
      * @param customer parametro utilizado para crear el nuevo registro
      * @return debe retornar un 200 created
      */
-    @RequestMapping(method = RequestMethod.POST)
-    // @PostMapping
-    public Customer postCliente(@RequestBody Customer customer){
+    // @RequestMapping(method = RequestMethod.POST)
+    @PostMapping
+    public ResponseEntity<?> postCliente(@RequestBody Customer customer){
         customers.add(customer);
-        return customer;
+        return ResponseEntity.status(HttpStatus.CREATED).body(Map.of("nombre", customer.getNombre()));
+        // return ResponseEntity.status(HttpStatus.CREATED).body("El cliente " + customer.getNombre() + "fue creado exitosamente");
+        // return ResponseEntity.ok(customer);
+        // return customer;
     }
-    @RequestMapping(method = RequestMethod.PUT)
-    // @PutMapping
+    // @RequestMapping(method = RequestMethod.PUT)
+    @PutMapping
     public Customer putCliente(@RequestBody Customer customer){
         for(Customer c : customers){
             if(c.getID() == customer.getID()){
@@ -86,8 +94,8 @@ public class CustomerController {
      * @param id se utilizar le parametro id para indicar un id especifico de un cliente para eliminarlo
      * @return retorna un tipo de respuesta 200 despues de eliminar el cliente con el id especificado
      */
-    @RequestMapping(value = ("/{id}"), method = RequestMethod.DELETE)
-    // @DeleteMapping("/{id}")
+    // @RequestMapping(value = ("/{id}"), method = RequestMethod.DELETE)
+    @DeleteMapping("/{id}")
     public Customer deleteClientente(@PathVariable int id){
         for(Customer c : customers){
             if(c.getID() == id){
@@ -105,8 +113,8 @@ public class CustomerController {
      *                 elementos del objeto
      * @return Retorna un json con el campo modificado
      */
-    @RequestMapping(method = RequestMethod.PATCH)
-    // @PatchMapping
+    // @RequestMapping(method = RequestMethod.PATCH)
+    @PatchMapping
     public Customer patchClientes(@RequestBody Customer customer){
         for(Customer c : customers){
             if(c.getID() == customer.getID()){
