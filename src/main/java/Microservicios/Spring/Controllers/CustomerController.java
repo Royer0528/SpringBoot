@@ -74,18 +74,19 @@ public class CustomerController {
     }
     // @RequestMapping(method = RequestMethod.PUT)
     @PutMapping
-    public Customer putCliente(@RequestBody Customer customer){
+    public ResponseEntity<?> putCliente(@RequestBody Customer customer){
         for(Customer c : customers){
             if(c.getID() == customer.getID()){
                 c.setNombre(customer.getNombre());
                 c.setUsername(customer.getUsername());
                 c.setPassword(customer.getPassword());
 
-
-                return c;
+                return ResponseEntity.ok("Cliente modificado exitosamente: " + customer.getUsername());
+                // return c;
             }
         }
-        return null;
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Cliente no encontrado: " + customer.getUsername());
+        // return null;
     }
 
     /**
@@ -96,15 +97,15 @@ public class CustomerController {
      */
     // @RequestMapping(value = ("/{id}"), method = RequestMethod.DELETE)
     @DeleteMapping("/{id}")
-    public Customer deleteClientente(@PathVariable int id){
+    public ResponseEntity<?> deleteClientente(@PathVariable int id){
         for(Customer c : customers){
             if(c.getID() == id){
                 customers.remove(c);
-
-                return c;
+                return ResponseEntity.ok("Usuario con el ID: " + id + " fue eliminado exitosamente");
+                        // return c;tat)
             }
         }
-        return null;
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("El usuario con el id: " + id + " no fue encontrado");
     }
 
     /**
