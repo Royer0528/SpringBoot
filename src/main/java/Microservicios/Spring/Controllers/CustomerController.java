@@ -103,7 +103,7 @@ public class CustomerController {
                 customers.remove(c);
                 return ResponseEntity.ok("Usuario con el ID: " + id + " fue eliminado exitosamente");
                         // return c;tat)
-            }
+            }  
         }
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body("El usuario con el id: " + id + " no fue encontrado");
     }
