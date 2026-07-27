@@ -35,4 +35,8 @@ public class TraceHeaderFilter extends OncePerRequestFilter {
 
         filterChain.doFilter(request, response);
     }
+    /**
+     *
+     * Se agrego componente filter
+     */
 }
