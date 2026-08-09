@@ -1,10 +1,12 @@
 package Microservicios.Spring.Controllers;
 
 import Microservicios.Spring.Domain.Customer;
+import lombok.NonNull;
 import org.apache.coyote.Request;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -38,7 +40,8 @@ public class CustomerController {
     //@RequestMapping(method = RequestMethod.GET)
     @GetMapping
             public ResponseEntity<List<Customer>> getCustomers(){
-                return ResponseEntity.ok(customers);
+
+        return ResponseEntity.ok(customers);
             }
 
     /**
@@ -52,7 +55,6 @@ public class CustomerController {
         for (Customer c : customers) {
             if(c.getUsername().equalsIgnoreCase(username)){
                 return ResponseEntity.ok(c);
-                // return c;
             }
         }
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Cliente no encontrado con username: " + username);
