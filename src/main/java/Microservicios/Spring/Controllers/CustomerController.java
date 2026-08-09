@@ -136,8 +136,6 @@ public class CustomerController {
         }
         return null;
     }
-
-    // Hola mundo
 }
 
 
