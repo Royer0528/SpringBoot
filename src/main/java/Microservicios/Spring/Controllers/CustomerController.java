@@ -55,7 +55,7 @@ public class CustomerController {
      */
     //@RequestMapping(value = "/{username}" , method = RequestMethod.GET)
     @GetMapping("/{username}")
-    public ResponseEntity<?> getcliente(@PathVariable String username){
+    public ResponseEntity <?> getcliente(@PathVariable String username){
         for (Customer c : customers) {
             if(c.getUsername().equalsIgnoreCase(username)){
                 return ResponseEntity.ok(c);
@@ -95,12 +95,14 @@ public class CustomerController {
                 c.setUsername(customer.getUsername());
                 c.setPassword(customer.getPassword());
 
-                return ResponseEntity.ok("Cliente modificado exitosamente: " + customer.getUsername());
-                // return c;
+                return ResponseEntity
+                        .noContent()
+                        .build();
             }
         }
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Cliente no encontrado: " + customer.getUsername());
-        // return null;
+        return ResponseEntity
+                .notFound()
+                .build();
     }
 
     /**
@@ -116,11 +118,13 @@ public class CustomerController {
             if(c.getID() == id){
                 customers.remove(c);
                 return ResponseEntity
-                        .status(HttpStatus.NO_CONTENT)
-                        .body("Cliente eliminado satisfactoriamente: " + c.getID());
+                        .noContent()
+                        .build();
             }  
         }
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("El usuario con el id: " + id + " no fue encontrado");
+        return ResponseEntity
+                .notFound()
+                .build();
     }
 
     /**
