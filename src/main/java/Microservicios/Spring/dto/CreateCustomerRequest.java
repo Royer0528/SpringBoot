@@ -13,12 +13,14 @@ import lombok.Setter;
 
 @JsonIgnoreProperties(ignoreUnknown = false)
 public class CreateCustomerRequest {
+
+    @NotNull
     private int ID;
-    @NotBlank(message = "El nombre es obligatorio")
+    @NotNull
     private String nombre;
     @NotNull
     private String username;
-
+    @NotNull
     private String password;
 
 

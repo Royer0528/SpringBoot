@@ -71,10 +71,19 @@ public class CustomerController {
     @PostMapping
     public ResponseEntity<?> postCliente(@Valid @RequestBody CreateCustomerRequest request){
         Customer customer = new Customer();
-        customers.add(customer);
-        return ResponseEntity.status(HttpStatus.CREATED).body(Map.of("nombre", customer.getNombre()));
 
+        customer.setID(request.getID());
+        customer.setNombre(request.getNombre());
+        customer.setUsername(request.getUsername());
+        customer.setPassword(request.getPassword());
+
+        customers.add(customer);
+
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body(Map.of("nombre", customer.getNombre()));
     }
+
     // @RequestMapping(method = RequestMethod.PUT)
     @PutMapping
     public ResponseEntity<?> putCliente(@RequestBody Customer customer){

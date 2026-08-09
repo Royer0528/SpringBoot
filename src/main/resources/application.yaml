@@ -1,3 +1,6 @@
 spring:
   application:
     name: Microservicios-Spring
+  jackson:
+    deserialization:
+      fail-on-unknown-properties: true
