@@ -1,6 +1,8 @@
 package Microservicios.Spring.Controllers;
 
 import Microservicios.Spring.Domain.Customer;
+import Microservicios.Spring.dto.CreateCustomerRequest;
+import jakarta.validation.Valid;
 import lombok.NonNull;
 import org.apache.coyote.Request;
 import org.springframework.http.HttpStatus;
@@ -62,17 +64,16 @@ public class CustomerController {
 
     /**
      * Controlador rest del tipo POST para crear un nuevo registro en la lista de clientes
-     * @param customer parametro utilizado para crear el nuevo registro
+     * @param request parametro utilizado para crear el nuevo registro
      * @return debe retornar un 200 created
      */
     // @RequestMapping(method = RequestMethod.POST)
     @PostMapping
-    public ResponseEntity<?> postCliente(@RequestBody Customer customer){
+    public ResponseEntity<?> postCliente(@Valid @RequestBody CreateCustomerRequest request){
+        Customer customer = new Customer();
         customers.add(customer);
         return ResponseEntity.status(HttpStatus.CREATED).body(Map.of("nombre", customer.getNombre()));
-        // return ResponseEntity.status(HttpStatus.CREATED).body("El cliente " + customer.getNombre() + "fue creado exitosamente");
-        // return ResponseEntity.ok(customer);
-        // return customer;
+
     }
     // @RequestMapping(method = RequestMethod.PUT)
     @PutMapping
