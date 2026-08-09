@@ -5,6 +5,8 @@ import Microservicios.Spring.dto.CreateCustomerRequest;
 import jakarta.validation.Valid;
 import lombok.NonNull;
 import org.apache.coyote.Request;
+import org.apache.coyote.Response;
+import org.apache.tomcat.util.http.parser.HttpParser;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
@@ -109,12 +111,13 @@ public class CustomerController {
      */
     // @RequestMapping(value = ("/{id}"), method = RequestMethod.DELETE)
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteClientente(@PathVariable int id){
+    public ResponseEntity <?> deleteClientente(@PathVariable int id){
         for(Customer c : customers){
             if(c.getID() == id){
                 customers.remove(c);
-                return ResponseEntity.ok("Usuario con el ID: " + id + " fue eliminado exitosamente");
-                        // return c;tat)
+                return ResponseEntity
+                        .status(HttpStatus.NO_CONTENT)
+                        .body("Cliente eliminado satisfactoriamente: " + c.getID());
             }  
         }
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body("El usuario con el id: " + id + " no fue encontrado");
@@ -128,7 +131,7 @@ public class CustomerController {
      */
     // @RequestMapping(method = RequestMethod.PATCH)
     @PatchMapping
-    public Customer patchClientes(@RequestBody Customer customer){
+    public ResponseEntity <?> patchClientes(@RequestBody Customer customer){
         for(Customer c : customers){
             if(c.getID() == customer.getID()){
                 if(customer.getNombre() != null){
@@ -141,15 +144,15 @@ public class CustomerController {
                     c.setPassword(customer.getPassword());
                 }
 
-                return c;
+                return ResponseEntity
+                        .ok("Cliente actualizado correctamente: " + customer.getNombre());
             }
         }
-        return null;
+        return ResponseEntity
+                .status(HttpStatus.NOT_FOUND)
+                .body("Cliente no encontrado con el id: " + customer.getID());
     }
 }
-
-
-
 
 
 
