@@ -22,6 +22,4 @@ public class CreateCustomerRequest {
     private String username;
     @NotNull
     private String password;
-
-
 }
