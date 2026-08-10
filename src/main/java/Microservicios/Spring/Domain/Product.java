@@ -3,15 +3,15 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Getter @Setter
 
-public class Customer {
+public class Product {
 
-    private int ID;
+    private Integer id;
     private String nombre;
-    private String username;
-    private String password;
+    private Double precio;
+    private Integer stock;
 
 }
