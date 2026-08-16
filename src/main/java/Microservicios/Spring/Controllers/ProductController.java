@@ -1,6 +1,7 @@
 package Microservicios.Spring.Controllers;
 
 import Microservicios.Spring.Domain.Product;
+import Microservicios.Spring.Service.ProductService;
 import Microservicios.Spring.Service.ProductsServiceImpl;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,7 +14,7 @@ import java.util.List;
 @RequestMapping("/productos")
 public class ProductController {
 
-    ProductsServiceImpl productsService = new ProductsServiceImpl();
+    ProductService productsService = new ProductsServiceImpl();
 
     @GetMapping
     public ResponseEntity<?> getProducts(){
