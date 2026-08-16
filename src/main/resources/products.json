@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "name": "TV",
+    "price": 799.99,
+    "stock": 10
+  },
+  {
+    "id": 2,
+    "name": "LG",
+    "price": 499.99,
+    "stock": 25
+  },
+  {
+    "id": 3,
+    "name": "Celular",
+    "price": 299.99,
+    "stock": 15
+  },
+  {
+    "id": 3,
+    "name": "Reloj de bolsillo",
+    "price": 199.99,
+    "stock": 30
+  }
+]
