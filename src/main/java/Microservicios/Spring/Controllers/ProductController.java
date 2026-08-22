@@ -16,8 +16,8 @@ import java.util.List;
 @RequestMapping("/productos")
 public class ProductController {
 
+    //Inyeccion de dependencia
     @Autowired
-    @Qualifier("jsonResourceService")
     private ProductService productsService;
 
     @GetMapping
