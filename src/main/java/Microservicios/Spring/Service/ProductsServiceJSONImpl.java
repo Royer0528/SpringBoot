@@ -9,8 +9,8 @@ import tools.jackson.databind.ObjectMapper;
 import java.io.IOException;
 import java.util.List;
 
-@Primary
-@Service
+//Bean de servicio, obtine los recursos desde la lista JSON
+@Service("jsonResourceService")
 public class ProductsServiceJSONImpl implements ProductService{
     @Override
     public List<Product> getProducts() {
