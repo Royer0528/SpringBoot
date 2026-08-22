@@ -11,7 +11,11 @@ RUN mvn clean package -DskipTests
 FROM eclipse-temurin:17-jre-jammy
 WORKDIR /app
 
-COPY --from=build /app/target/*.jar app.jar
+RUN useradd --system --create-home --uid 10001 appuser
+
+COPY --from=build --chown=appuser:appuser /app/target/*.jar app.jar
+
+USER appuser
 
 EXPOSE 8080
 
