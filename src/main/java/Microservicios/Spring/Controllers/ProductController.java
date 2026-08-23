@@ -1,5 +1,6 @@
 package Microservicios.Spring.Controllers;
 
+import Microservicios.Spring.Config.ExternalizedConfigurations;
 import Microservicios.Spring.Domain.Product;
 import Microservicios.Spring.Service.ProductService;
 import Microservicios.Spring.Service.ProductsServiceImpl;
@@ -22,8 +23,14 @@ public class ProductController {
     @Autowired
     private ProductService productsService;
 
+    @Autowired
+    private ExternalizedConfigurations externalizedConfigurations;
+
     @GetMapping
     public ResponseEntity<?> getProducts(){
+
+        System.out.println(externalizedConfigurations.toString());
+
         List<Product> products = productsService.getProducts();
 
         return ResponseEntity.ok(products);
