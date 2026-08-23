@@ -1,4 +1,4 @@
-package Microservicios.Spring.Controllers;
+package com.Practica.Propuesta1.Controllers.Controllers;
 
 import Microservicios.Spring.Config.ExternalizedConfigurations;
 import Microservicios.Spring.Domain.Product;
