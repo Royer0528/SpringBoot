@@ -2,6 +2,7 @@ package Microservicios.Spring.Service;
 
 import Microservicios.Spring.Domain.Product;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import org.w3c.dom.stylesheets.LinkStyle;
 
@@ -10,9 +11,14 @@ import java.util.Arrays;
 import java.util.List;
 
 //bean de servicio, estrae la informacion desde la lista de java
+@Lazy
 @Service
 @ConditionalOnProperty(name = "service.products", havingValue = "list")
 public class ProductsServiceImpl implements ProductService {
+
+    public ProductsServiceImpl(){
+        System.out.println("Instancia de la clase ProductServiceImpl");
+    }
 
     List<Product> products = new ArrayList<>(Arrays.asList(
             new Product(1,"Laptop",799.99,10),
