@@ -1,4 +1,4 @@
-package Microservicios.Spring.Domain;
+package com.Practica.Propuesta1.Spring.Domain;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

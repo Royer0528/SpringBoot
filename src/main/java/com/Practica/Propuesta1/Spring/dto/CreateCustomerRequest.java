@@ -1,4 +1,4 @@
-package Microservicios.Spring.dto;
+package com.Practica.Propuesta1.Spring.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.validation.constraints.*;

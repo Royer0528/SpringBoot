@@ -1,12 +1,10 @@
-package com.Practica.Propuesta1.Controllers.Controllers;
+package com.Practica.Propuesta1.Spring.Controllers;
 
-import Microservicios.Spring.Domain.Customer;
-import Microservicios.Spring.dto.CreateCustomerRequest;
+import com.Practica.Propuesta1.Spring.Domain.Customer;
+import com.Practica.Propuesta1.Spring.dto.CreateCustomerRequest;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -14,7 +12,6 @@ import java.net.URI;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
 /**
  *

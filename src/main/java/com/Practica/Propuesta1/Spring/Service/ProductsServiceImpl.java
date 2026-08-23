@@ -1,10 +1,9 @@
-package Microservicios.Spring.Service;
+package com.Practica.Propuesta1.Spring.Service;
 
-import Microservicios.Spring.Domain.Product;
+import com.Practica.Propuesta1.Spring.Domain.Product;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
-import org.w3c.dom.stylesheets.LinkStyle;
 
 import java.util.ArrayList;
 import java.util.Arrays;

@@ -1,4 +1,4 @@
-package Microservicios.Spring.Config;
+package com.Practica.Propuesta1.Spring.Config;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;

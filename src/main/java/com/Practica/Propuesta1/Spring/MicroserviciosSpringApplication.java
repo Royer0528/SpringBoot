@@ -1,4 +1,4 @@
-package Microservicios.Spring;
+package com.Practica.Propuesta1.Spring;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
